@@ -23,21 +23,22 @@
 					    current_user
 					 end
 					%>
-				  <div>
-					<%=
-					  if logged_in?
-					    link_to @current_user.email, user_path(@current_user.id)
-					  end
-					%>
+				  
+					<% if logged_in? %>
+					<div>
+						<%=  link_to @current_user.email, user_path(@current_user.id) %>
 					</div>
 					<div>
-					  <%=
-					    if logged_in?
-					      link_to "ログアウト", session_path(@current_user.id), method: :delete
-					    else
-					      link_to "ログイン", sessions_path
-					    end
-					  %>
+						<%= link_to "ログアウト", session_path(@current_user.id), method: :delete %>
+					</div>
+					<% else %>
+					  <div>
+					    <%= link_to "新規登録" , new_user_path %>
+					  </div>
+					  <div>
+					  	<%= link_to "ログイン", sessions_path %>
+					  </div>
+					<% end %>
 					</div>
 				</div>
 			</nav>
