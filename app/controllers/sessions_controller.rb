@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      session[:book_id] = nil
+      session[:bookselect] = nil
       redirect_to user_path(user.id)
     else
       flash[:danger] = 'ログインに失敗しました'
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   
   def destroy
     session.delete(:user_id)
-    session.delete(:book_id)
+    session.delete(:bookselect)
     flash[:notice] = 'ログアウトしました'
     redirect_to new_session_path
   end
