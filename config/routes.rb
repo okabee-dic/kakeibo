@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :monthlyinputs
   
   get '/graph/linegraph', to: 'graphs#linegraph'
+  get '/' , to: 'books#index'
 end
