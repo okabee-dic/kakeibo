@@ -36,7 +36,7 @@ class GraphsController < ApplicationController
       end
       years.push(year)
       months.push(month)
-      
+
       receipts = view_context.make_receipts(year, month)
       
       spends.push(receipts[:payment])
@@ -45,6 +45,7 @@ class GraphsController < ApplicationController
       
       
     end
+    
     
     for i in 0..10
       gon.incomes << incomes[10-i]
