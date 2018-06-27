@@ -1,0 +1,20 @@
+<%
+  pretime  = get_pretime
+  posttime = get_posttime
+%>
+<h2><%= @year %>年<%= @month %>月から10か月分のグラフ</h2>
+<div>
+  <div class="timeselect flex">
+  <div class="left">
+    &lt;&lt;<%= link_to pretime[:str] , graph_linegraph_path(book_id: @book.id, month: pretime[:month], year: pretime[:year]) %> 
+  </div>
+  <div class="right">
+    <%= link_to posttime[:str] , graph_linegraph_path(book_id: @book.id, month: posttime[:month], year: posttime[:year]) %>&gt;&gt;
+  </div>
+</div>
+</div>
+<div style="width: 500px">
+  <canvas id="myChart" width="500" height="500" style="border: 1px dashed #aaa">
+  </canvas>
+</div>
+<script>draw_graph();</script>

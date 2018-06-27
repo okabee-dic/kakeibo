@@ -1,0 +1,29 @@
+<h2>ジャンル編集</h2>
+<table class="table table_border">
+    <tr>
+      <th>#</th>
+      <th>名前</th>
+      <th>コンビニ</th>
+      <th>外食</th>
+      <th>スーパー</th>
+      <th>収入</th>
+      <th>趣味</th>
+      <th>維持費</th>
+      <th>-</th>
+    </tr>
+  <% @genres.each do |g| %>
+    <tr>
+      <td><%= g.id %></td>
+      <td><%= g.name %></td>
+      <td><%= g.convinience %></td>
+      <td><%= g.eatout %></td>
+      <td><%= g.supermarket %></td>
+      <td><%= g.income %></td>
+      <td><%= g.hobby %></td>
+      <td><%= g.cost %></td>
+      <td><%= link_to "削除", genre_path(g.id), method: :delete %></td>
+    </tr> 
+  <% end %>
+</table>
+
+<%= link_to "ジャンル追加" , new_genre_path %>

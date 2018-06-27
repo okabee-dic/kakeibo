@@ -1,0 +1,21 @@
+<h2>店舗情報編集</h2>
+<table class="table table_border">
+    <tr>
+      <th>#</th>
+      <th>名前</th>
+      <th>ジャンル</th>
+      <th>-</th>
+      <th>-</th>
+    </tr>
+  <% @stores.each do |s| %>
+    <tr>
+      <td><%= s.id %></td>
+      <td><%= s.name %></td>
+      <td><%= Genre.find(s.genre_id).name %></td>
+      <td><%= link_to "編集", edit_store_path(s.id) %></td>
+      <td><%= link_to "削除", store_path(s.id), method: :delete %></td>
+    </tr> 
+  <% end %>
+</table>
+
+<%= link_to "店舗追加" , new_store_path %>

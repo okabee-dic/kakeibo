@@ -1,0 +1,13 @@
+<%= form_with(model: @store, local: true) do |form| %>
+  <p>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :genre_id %>
+    <%= form.collection_select :genre_id, Genre.all, :id, :name %>
+  </p>
+  <p>
+    <%= form.submit "Submit" %>
+  </p>
+<% end %>

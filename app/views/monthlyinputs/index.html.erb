@@ -1,0 +1,24 @@
+<h2>毎月ごとの自動入力の一覧</h2>
+
+<table class="table table_border">
+  <tr>
+    <th>店名</th>
+    <th>金額</th>
+    <th>入力日</th>
+    <th>期間の始まり</th>
+    <th>期間の終わり</th>
+    <th>-</th>
+  </tr>
+ <% @monthlyinputs.each do |m| %>
+  <tr>
+    <td><%= Store.find(m.store_id).name %></td>
+    <td><%= m.price %></td>
+    <td><%= m.inputday %></td>
+    <td><%= m.start %></td>
+    <td><%= m.enddate %></td>
+    <td><%= link_to "削除", monthlyinput_path(m.id), method: :delete %></td>
+  </tr>
+ <% end %>
+</table>
+
+<%= link_to "新規作成", new_monthlyinput_path(:book_id => @book_id) %>

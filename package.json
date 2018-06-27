@@ -1,5 +1,8 @@
 {
   "name": "kakeibo",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "chart.js": "^2.7.1"
+  }
 }

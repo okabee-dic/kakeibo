@@ -3,12 +3,80 @@
   <head>
     <title>Kakeibo</title>
     <%= csrf_meta_tags %>
+    <%= Gon::Base.render_data %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+	<div class="mainContainer">
+		<header class="header">
+			<nav class="flex relative">
+				<div class="headerLeft">
+					<div>
+					  <h1 class="title">kakeibo</h1>
+					</div>
+				</div>
+				<div class="headerRight flex">
+				  <%
+				    if logged_in?
+					    current_user
+					 end
+					%>
+				  <div>
+					<%=
+					  if logged_in?
+					    link_to @current_user.email, user_path(@current_user.id)
+					  end
+					%>
+					</div>
+					<div>
+					  <%=
+					    if logged_in?
+					      link_to "ログアウト", session_path(@current_user.id), method: :delete
+					    else
+					      link_to "ログイン", sessions_path
+					    end
+					  %>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<section class="content">
+			<aside class="contentLeft">
+				<nav class="leftNavi">
+					<ul class="noMarker">
+						<li>
+							<%= link_to "家計簿を選ぶ", books_path %>
+						</li>
+						<% if booknav || @bookid %>
+						<li>
+							<%= link_to "家計簿を見る" , book_path(@bookid) %>
+						</li>
+						<li>
+							<%= link_to "グラフを見る", graph_linegraph_path(book_id: @bookid) %>
+						</li>
+						<% end %>
+					</ul>
+				</nav>
+      </aside>
+      <div class="contentRight">
+			  <div class="flashmessage">
+          <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+          <% end %>
+       </div>
+       <%= yield %>
+      </div>
+		</section>
+		<footer class="footer">
+			<div class="footerContainer">
+			  aa
+		  </div>
+      <div class="copyright">
+        Copyright(C) 2018- kakeibo
+      </div>
+		</footer>
+	</div>
+</body>
 </html>

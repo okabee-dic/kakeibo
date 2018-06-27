@@ -1,0 +1,33 @@
+<%= form_with(model: @genre, local: true) do |form| %>
+  <p>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  </p>
+  <p>
+  <%= form.label :convinience %>
+  <%= form.number_field :convinience %>
+  </p>
+  <p>
+  <%= form.label :eatout %>
+  <%= form.number_field :eatout %>
+  </p>
+  <p>
+  <%= form.label :supermarket %>
+  <%= form.number_field :supermarket %>
+  </p>
+  <p>
+  <%= form.label :income %>
+  <%= form.number_field :income %>
+  </p>
+  <p>
+  <%= form.label :hobby %>
+  <%= form.number_field :hobby %>
+  </p>
+  <p>
+  <%= form.label :cost %>
+  <%= form.number_field :cost %>
+  </p>
+  <p>
+  <%= form.submit "Submit" %>
+  </p>
+<% end %>

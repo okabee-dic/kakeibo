@@ -1,0 +1,9 @@
+<h2>家計簿を選ぶ</h2>
+
+<ul class="noMarker">
+<% @books.each do |book| %>  
+  <li>
+    <%= link_to book.name, book_path(book.id) %>  
+  </li>
+<% end %>
+</ul>
