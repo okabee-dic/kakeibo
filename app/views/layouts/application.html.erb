@@ -52,7 +52,7 @@
 						<% if session[:bookselect] %>
 						<% @bookid = session[:bookselect] %>
 						<li>
-							<%= link_to "家計簿を見る" , book_path(@bookid) %>
+							<%= link_to "家計簿を作る" , book_path(@bookid) %>
 						</li>
 						<li>
 							<%= link_to "毎月ごとの自動入力" , monthlyinputs_path(book_id: @bookid) %>
