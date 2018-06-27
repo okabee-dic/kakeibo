@@ -164,6 +164,10 @@ div, p, section, footer, header, nav, aside {
   z-index: 100;
 }
 
+.contentContainer {
+  padding: 20px;
+}
+
 .leftNavi {
   height: 100%;
   width: 100%;

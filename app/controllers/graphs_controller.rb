@@ -20,9 +20,13 @@ class GraphsController < ApplicationController
     
     years = []
     months = []
-    prices = []
+    spends = []
+    incomes = []
+    totals = []
     gon.labels = []
-    gon.data = []
+    gon.spends = []
+    gon.incomes = []
+    gon.totals = []
     for i in 0..10
       month = @month - i
       year  = @year
@@ -35,13 +39,17 @@ class GraphsController < ApplicationController
       
       receipts = view_context.make_receipts(year, month)
       
-      prices.push(receipts[:payment])
+      spends.push(receipts[:payment])
+      incomes.push(receipts[:income])
+      totals.push(receipts[:income] - receipts[:payment])
       
       
     end
     
     for i in 0..10
-      gon.data << prices[10-i]
+      gon.incomes << incomes[10-i]
+      gon.spends << spends[10-i]
+      gon.totals << totals[10-i]
       gon.labels << months[10-i] 
     end
     

@@ -39,7 +39,6 @@
 					  	<%= link_to "ログイン", sessions_path %>
 					  </div>
 					<% end %>
-					</div>
 				</div>
 			</nav>
 		</header>
@@ -50,12 +49,25 @@
 						<li>
 							<%= link_to "家計簿を選ぶ", books_path %>
 						</li>
-						<% if booknav || @bookid %>
+						<% if session[:bookselect] %>
+						<% @bookid = session[:bookselect] %>
 						<li>
 							<%= link_to "家計簿を見る" , book_path(@bookid) %>
 						</li>
 						<li>
+							<%= link_to "毎月ごとの自動入力" , monthlyinputs_path(book_id: @bookid) %>
+						</li>
+						<li>
 							<%= link_to "グラフを見る", graph_linegraph_path(book_id: @bookid) %>
+						</li>
+						<li>
+							<%= link_to "お店の一覧を見る", stores_path(book_id: @bookid) %>
+						</li>
+						<li>
+							<%= link_to "お店を追加する", new_store_path(book_id: @bookid) %>
+						</li>
+						<li>
+							<%= link_to "お店の種類を見る", genres_path(book_id: @bookid) %>
 						</li>
 						<% end %>
 					</ul>

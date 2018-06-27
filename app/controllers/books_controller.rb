@@ -4,7 +4,6 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     @book.user_id = current_user.id
-    view_context.showleft
   end
   
   def create
@@ -25,6 +24,8 @@ class BooksController < ApplicationController
   
   def show
     @book = Book.find(params[:id])
+    
+    session[:bookselect] = params[:id]
     
     if params[:month]
       @month = params[:month].to_i
@@ -47,6 +48,14 @@ class BooksController < ApplicationController
     @bookid = params[:id]
     #p @data
     
+  end
+  
+  def destroy 
+    @book = Book.find(params[:id])
+    
+    @book.destroy
+    
+    redirect_to books_path
   end
   
   

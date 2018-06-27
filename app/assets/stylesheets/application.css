@@ -137,6 +137,14 @@ div, p, section, footer, header, nav, aside {
   border: 1px solid #888;
 }
 
+.pt10 {
+  padding-top: 10px;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
 /* ----------------------------- */
 /* header */
 /* ----------------------------- */
@@ -186,6 +194,10 @@ div, p, section, footer, header, nav, aside {
   padding-left: 250px;
   position: relative;
   z-index: 100;
+}
+
+.contentContainer {
+  padding: 20px;
 }
 
 .leftNavi {

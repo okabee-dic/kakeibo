@@ -1,106 +1,114 @@
-<h2><%= @book.name %></h2>
-<h3><%= @year %>年<%= @month %>月</h3>
+<div class="contentContainer">
+  <h2><%= @book.name %></h2>
+  <h3><%= @year %>年<%= @month %>月</h3>
 <%
   pretime  = get_pretime
   posttime = get_posttime
 %>
-<div class="timeselect flex">
-  <div class="left">
-    &lt;&lt;<%= link_to pretime[:str] , book_path(@book.id, month: pretime[:month], year: pretime[:year]) %> 
+  <div class="timeselect flex">
+    <div class="left">
+      &lt;&lt;<%= link_to pretime[:str] , book_path(@book.id, month: pretime[:month], year: pretime[:year]) %> 
+    </div>
+    <div class="right">
+      <%= link_to posttime[:str] , book_path(@book.id, month: posttime[:month], year: posttime[:year]) %>&gt;&gt;
+    </div>
   </div>
-  <div class="right">
-    <%= link_to posttime[:str] , book_path(@book.id, month: posttime[:month], year: posttime[:year]) %>&gt;&gt;
-  </div>
-</div>
-<div class="flex">
-<div class="income">
-<table class="table table_border">
-  <tr>
-    <th colspan="4">収入</th>
-  </tr>
-  <tr>
-    <th>収入元</th>
-    <th>金額</th>
-    <th>日付</th>
-    <th>-</th>
-  </tr>
-  
-  <% @data.each do |r| %>
+  <div class="flex">
+    <div class="income">
+      <table class="table table_border">
+        <tr>
+          <th colspan="4">収入</th>
+        </tr>
+        <tr>
+          <th>収入元</th>
+          <th>金額</th>
+          <th>日付</th>
+          <th>-</th>
+        </tr>
+<% @data.each do |r| %>
   <% store = Store.find(r.store_id) %>
   <% if Genre.find(store.genre_id).income == 1 %>
-  <tr>
-    <td><%= store.name %></td>
-    <td><%= r.price %></td>
-    <td><%= r.pay_date %></td>
-    <td>
-      
-      <%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %>
-    </td>
-  </tr>
+         <tr>
+           <td><%= store.name %></td>
+           <td><%= r.price %></td>
+           <td><%= r.pay_date %></td>
+           <td>
+             <%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %>
+           </td>
+        </tr>
   <% end %>
-  <% end %>
-</table>
-<table class="table table_border table_total">
-  <tr>
-    <td>計</td>
-    <td><%= @income %>&nbsp;円</td>
-  </tr>
-</table>
-</div>
-<div class="spend">  
-<table class="table table_border">
-  <tr>
-    <th colspan="4">支出</th>
-  </tr>
-  <tr>
-    <th>店名</th>
-    <th>金額</th>
-    <th>日付</th>
-    <th>-</th>
-  </tr>
-  <% @data.each do |r| %>
+<% end %>
+        <tr>
+          <td>計</td>
+          <td colspan="3"><%= @income %>&nbsp;円</td>
+        </tr>
+      </table>
+    </div>
+    <div class="spend">  
+      <table class="table table_border">
+        <tr>
+          <th colspan="4">支出</th>
+        </tr>
+        <tr>
+          <th>店名</th>
+          <th>金額</th>
+          <th>日付</th>
+          <th>-</th>
+        </tr>
+<% @data.each do |r| %>
   <% store = Store.find(r.store_id) %>
   <% if Genre.find(store.genre_id).income == 0 %>
-  <tr>
-    <td><%= store.name %></td>
-    <td><%= r.price %></td>
-    <td><%= r.pay_date %></td>
-    <td><%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %></td>
-  </tr>
+        <tr>
+          <td><%= store.name %></td>
+          <td><%= r.price %></td>
+          <td><%= r.pay_date %></td>
+          <td><%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %></td>
+        </tr>
   <% end %>
-  <% end %>
-</table>
-<table class="table table_border  table_total">
-  <tr>
-    <td>計</td>
-    <td><%= @payment %>&nbsp;円</td>
-  </tr>
-</table>
-</div>
-</div> <!-- class="flex" -->
+<% end %>
+        <tr>
+          <td>計</td>
+          <td colspan="3"><%= @payment %>&nbsp;円</td>
+        </tr>
+      </table>
+    </div>
+  </div> <!-- class="flex" -->
+  
+  <div class="pt10">
+    <table class="table table_border">
+    <tr>
+      <td>差引</td>
+      <td><%= @income - @payment %>&nbsp;円</td>
+    </tr>
+    </table>
+  </div>
 
-<div class="new_receipt">
-<% receipt = Receipt.new %>
-<%= form_with(model: receipt, local: true, url: receipts_path) do |form| %>
-  <p>
-    <%= form.label :store_id %>
-    <%= form.collection_select :store_id, Store.all, :id, :name %>
-  </p>
-  <p>
-    <%= form.label :pay_date %>
-    <%= form.date_select( :pay_date, start_year: 2010, use_month_numbers: true, 
+  <div class="new_receipt pt10">
+      <h3>新規レシート</h3>
+  <% receipt = Receipt.new %>
+  <%= form_with(model: receipt, local: true, url: receipts_path) do |form| %>
+    <p>
+      <%= form.label :store_id %>
+      <%= form.collection_select :store_id, @book.stores, :id, :name %>
+    </p>
+    <p>
+      <%= form.label :pay_date %>
+      <%= form.date_select( :pay_date, start_year: 2010, use_month_numbers: true, 
           end_year:   (Time.now.year),
-          default:    Date.new(Time.now.year, Time.now.month, 1),
+          default:    Date.new(@year, @month, 1),
           date_separator: '/' )
           %>
-  </p>
-  <p>
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </p>
-  <p>
-    <%= form.hidden_field :book_id, value: @book.id.to_s %>
-    <%= form.submit "Submit" %>
-  </p>
-<% end %>
-</div> <!-- class="new_receipt" -->
+    </p>
+    <p>
+      <%= form.label :price %>
+      <%= form.number_field :price %>
+    </p>
+    <p>
+      <%= form.hidden_field :book_id, value: @book.id.to_s %>
+      <%= form.hidden_field :month , value: @month %>
+      <%= form.hidden_field :year , value: @year %>
+      <%= form.submit "Submit" %>
+    </p>
+  <% end %>
+  </div> <!-- class="new_receipt" -->
+</div> <!-- class="contentContainer" -->

@@ -8,6 +8,7 @@
     <%= form.collection_select :genre_id, Genre.all, :id, :name %>
   </p>
   <p>
+    <%= form.hidden_field :book_id, value: @bookid %>
     <%= form.submit "Submit" %>
   </p>
 <% end %>

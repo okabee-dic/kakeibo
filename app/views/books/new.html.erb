@@ -1,12 +1,14 @@
-<h2>新規家計簿を作る</h2>
-<div>
-  <%= form_with(model: @book, local: true) do |form| %>
-  <p>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </p>
-  <p>
-    <%= form.submit "Submit" %>
-  </p>
-  <% end %>
+<div class="contentContainer">
+  <h2>新規家計簿を作る</h2>
+  <div>
+    <%= form_with(model: @book, local: true) do |form| %>
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.submit "Submit" %>
+    </p>
+    <% end %>
+  </div>
 </div>

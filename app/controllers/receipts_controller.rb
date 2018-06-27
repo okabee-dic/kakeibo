@@ -2,17 +2,30 @@ class ReceiptsController < ApplicationController
   before_action :check_login
   def create
     book = params[:receipt][:book_id]
-    puts book
-    if Book.exists?(:id => book)
+    if (params[:receipt][:store_id]).nil?
+        #店情報は必須
+        redirect_to new_store_path(book_id: book)
+    elsif (params[:receipt][:price]).empty?
+      #金額なしは再入力
+      flash.now[:danger] = "金額を入力してください"
+      redirect_to book_path(book)
+    else
+      if Book.exists?(:id => book)
       #@receipt = Receipt.new(receipt_params)
       #@receipt.user_id = current_user.id
       #@receipt.save
-      receipt = receipt_params
-      receipt[:user_id] = current_user.id
-      Book.find(book).receipts.create(receipt)
-      redirect_to book_path(book)
-    else
-      redirect_to user_path(current_user.id)
+        receipt = receipt_params
+        receipt[:user_id] = current_user.id
+      
+      
+      
+        Book.find(book).receipts.create(receipt)
+        month = params[:receipt][:month]
+        year = params[:receipt][:year]
+        redirect_to book_path(book, month: month, year: year)
+      else
+        redirect_to user_path(current_user.id)
+      end
     end
   end
   
