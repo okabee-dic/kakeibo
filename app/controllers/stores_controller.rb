@@ -9,6 +9,12 @@ class StoresController < ApplicationController
   
   def create
     @book = Book.find(params[:store][:book_id])
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @store = @book.stores.build(store_params)
     @bookid = @book.id
     
@@ -29,10 +35,22 @@ class StoresController < ApplicationController
   def edit
     @store = Store.find(params[:id])
     @bookid = params[:book_id]
+    @book = Book.find(@bookid)
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
   end
   
   def update
     bookid = params[:store][:book_id]
+    @book = Book.find(bookid)
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @store = Store.find(params[:id])
     if @store.update(store_params)
       redirect_to stores_path(book_id: bookid)
@@ -45,9 +63,15 @@ class StoresController < ApplicationController
   
   
   def destroy
+    #家計簿を作成したユーザだけが追加可能
+    @book = Book.find(params[:book_id])
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     Store.find(params[:id]).destroy
     
-    redirect_to stores_path
+    redirect_to stores_path(book_id: @book.id)
   end
   
   private

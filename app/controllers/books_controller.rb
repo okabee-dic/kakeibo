@@ -29,6 +29,10 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     session[:bookselect] = params[:id]
     
     if params[:month]
@@ -67,4 +71,6 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:name)
   end
+  
+  
 end

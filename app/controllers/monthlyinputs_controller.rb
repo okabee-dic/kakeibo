@@ -4,6 +4,14 @@ class MonthlyinputsController < ApplicationController
       redirect_to books_path
     end
     @book_id = params[:book_id]
+    
+    @book = Book.find(@book_id)
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @monthlyinput = Monthlyinput.new
   end
   
@@ -16,6 +24,12 @@ class MonthlyinputsController < ApplicationController
     end
     @book = Book.find(@monthlyinput.book_id)
     @book_id = @book.id
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @monthlyinput = @book.monthlyinputs.build(monthlyinput_params)
     if @monthlyinput.save
       redirect_to monthlyinputs_path(:book_id => @monthlyinput.book_id)
@@ -37,6 +51,12 @@ class MonthlyinputsController < ApplicationController
   def destroy
     @monthlyinput = Monthlyinput.find(params[:id])
     @book = Book.find(@monthlyinput.book_id)
+    
+    #家計簿を作成したユーザだけが可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @book.monthlyinputs.find(params[:id]).destroy
     flash.now[:danger] = "自動入力を削除しました。"
     

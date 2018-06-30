@@ -12,4 +12,12 @@ module SessionsHelper
       redirect_to new_session_path
     end
   end
+  
+  def check_user(_id)
+    unless current_user.id == _id
+      redirect_to books_path
+      return false
+    end
+    return true
+  end
 end
