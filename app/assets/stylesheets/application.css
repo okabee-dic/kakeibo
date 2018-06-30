@@ -348,8 +348,8 @@ h2.title, h3.title {
 .receiptWindow {
   position: relative;
   
-  right: -36.0rem;
-  width: 36.0rem;
+  right: -32.0rem;
+  width: 32.0rem;
   padding: 20px;
   background-color: #fafafa;
   border: 1px solid #ddd;
