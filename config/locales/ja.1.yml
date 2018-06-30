@@ -1,0 +1,50 @@
+ja:
+  activerecord:
+    models:
+      book: 家計簿
+      receipt: レシート
+      monthlyinput: 月ごとの自動入力
+      store: 店舗
+      genre: 店舗の種類
+      session: ログイン
+      user: ユーザ
+    attributes:
+      book:
+        name: 名前
+        
+      receipt:
+        store_id: 店名
+        pay_date: 支払日
+        price: 金額
+        
+      monthlyinput:
+        price: 金額
+        store_id: 店名
+        inputday: 入力日
+        start: 開始日
+        enddate: 終了日
+        
+      store:
+        name: 店舗名
+        genre_id: 店舗の種類
+        
+      genre:
+        name: ジャンル名
+        convinience: コンビニ
+        supermarket: スーパー
+        eatout: 外食
+        cost: 維持費
+        income: 収入
+        hobby: 趣味
+        
+      session: 
+        email: メールアドレス
+        password: パスワード
+        
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        sex: 性別
+        birth: 誕生日

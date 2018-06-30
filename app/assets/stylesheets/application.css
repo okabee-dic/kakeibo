@@ -38,10 +38,17 @@ time, mark, audio, video {
 
 html {
   font-size: 62.5%;
+  overflow-x:hidden;
 }
 
 body {
   line-height: 1;
+}
+
+@media screen and (min-width: 1360px) {
+  html {
+    font-size: 100%;
+  }
 }
 
 article, aside, details, figcaption, figure,
@@ -132,6 +139,10 @@ div, p, section, footer, header, nav, aside {
 
 .table td, .table th {
   padding: 8px;
+}
+
+.table td.price {
+  text-align: right;
 }
 
 .table_border td, .table_border th {
@@ -305,6 +316,7 @@ h2.title, h3.title {
 
 .contentContainer {
   padding: 20px;
+  position: relative;
 }
 
 .leftNavi {
@@ -323,6 +335,52 @@ h2.title, h3.title {
   background-color: #79baca;
   color: white;
 }
+
+/* ----------------------------- */
+/* receipt input window */
+/* ----------------------------- */
+.receiptWindowArea {
+  position: absolute;
+  right: 0px;
+  top: 36px;
+}
+
+.receiptWindow {
+  position: relative;
+  
+  right: -36.0rem;
+  width: 36.0rem;
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.075);
+  display: block;
+  opacity: 0;
+  z-index: 8888;
+  
+  transition: right 400ms ease-out, opacity 300ms ease-out;
+}
+
+.receiptWindow.active{
+  /*display: none; */
+  right: 60px;
+  opacity: 1;
+}
+
+.addReceiptBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #83a7c8;
+  width: 60px;
+  height: 60px;
+  color: white;
+  font-size :50px;
+  text-align: center;
+  padding-top: 5px;
+  z-index:9999;
+}
+
 
 /* ----------------------------- */
 /* footer setting */

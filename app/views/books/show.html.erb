@@ -1,4 +1,5 @@
 <div class="contentContainer">
+<div class="contentLeftside">
   <% if @book.errors.any? %>
     <div id="error_explanation">
       <h3><%= @book.errors.count %>件のエラーがあります。</h3>
@@ -43,7 +44,7 @@
   <% if Genre.find(store.genre_id).income == 1 %>
          <tr>
            <td><%= store.name %></td>
-           <td><%= r.price %></td>
+           <td class="price"><%= r.price.to_s(:delimited) %></td>
            <td><%= r.pay_date %></td>
            <td>
              <%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %>
@@ -53,7 +54,7 @@
 <% end %>
         <tr>
           <td>計</td>
-          <td colspan="3"><%= @income %>&nbsp;円</td>
+          <td colspan="3"><%= @income.to_s(:delimited) %>&nbsp;円</td>
         </tr>
       </table>
     </div>
@@ -73,7 +74,7 @@
   <% if Genre.find(store.genre_id).income == 0 %>
         <tr>
           <td><%= store.name %></td>
-          <td><%= r.price %></td>
+          <td class="price"><%= r.price.to_s(:delimited) %></td>
           <td><%= r.pay_date %></td>
           <td><%= link_to "削除", receipt_path(r.id), method: :delete if r.id != nil %></td>
         </tr>
@@ -81,7 +82,7 @@
 <% end %>
         <tr>
           <td>計</td>
-          <td colspan="3"><%= @payment %>&nbsp;円</td>
+          <td colspan="3"><%= @payment.to_s(:delimited) %>&nbsp;円</td>
         </tr>
       </table>
     </div>
@@ -91,12 +92,18 @@
     <table class="table table_border">
     <tr>
       <td>差引</td>
-      <td><%= @income - @payment %>&nbsp;円</td>
+      <td><%= (@income - @payment ).to_s(:delimited) %>&nbsp;円</td>
     </tr>
     </table>
   </div>
 
-  <div class="new_receipt pt20">
+
+</div>
+<div class="receiptWindowArea">
+  <div class="addReceiptBtn">
+    <i class="fa fa-plus-square"></i>
+  </div>
+    <div class="receiptWindow new_receipt active">
       <h3 class="title">新規レシート</h3>
   <% receipt = Receipt.new %>
   <%= form_with(model: receipt, local: true, url: receipts_path) do |form| %>
@@ -124,4 +131,5 @@
     </p>
   <% end %>
   </div> <!-- class="new_receipt" -->
+</div>
 </div> <!-- class="contentContainer" -->

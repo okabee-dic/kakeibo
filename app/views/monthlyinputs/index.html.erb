@@ -13,7 +13,7 @@
  <% @monthlyinputs.each do |m| %>
   <tr>
     <td><%= Store.find(m.store_id).name %></td>
-    <td><%= m.price %></td>
+    <td class="price"><%= m.price.to_s(:delimited) %></td>
     <td><%= m.inputday %></td>
     <td><%= m.start %></td>
     <td><%= m.enddate %></td>
