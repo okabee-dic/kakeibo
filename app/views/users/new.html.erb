@@ -13,35 +13,35 @@
 <% end %>
 
 <%= form_with(model: @user, local: true) do |f| %>  
-  <p class="pb10">
+  <div class="pb10">
   <%= f.label :name %>
   <%= f.text_field :name %>
-  </p>
-  <p class="pb10">
+  </div>
+  <div class="pb10">
   <%= f.label :email %>
   <%= f.email_field :email %>
-  </p>
-  <p class="pb10">
+  </div>
+  <div class="pb10">
   <%= f.label :password %>
   <%= f.password_field :password %>
-  </p>
-  <p class="pb10">
+  </div>
+  <div class="pb10">
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-  </p>
-  <p class="pb10">
+  </div>
+  <div class="pb10">
   <%= f.label :sex %>
   <%= select :user, :sex, [["不明", 0], ["男性", 1], ["女性", 2], ["その他", 3]] %>
-  </p>
-  <p class="pb10">
+  </div>
+  <div class="pb10">
   <%= f.label :birth %>
   <%= f.date_select( :birth, start_year: 1930, use_month_numbers: true, 
           end_year:   (Time.now.year - 18),
           default:    Date.new(1989, 1, 1),
           date_separator: '/' )
           %>
-  </p>
-  <%= f.submit "Create my account" %>
+  </div>
+  <%= f.submit "新規登録" %>
 <% end %>
 
 </div>

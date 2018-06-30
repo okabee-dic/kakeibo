@@ -7,6 +7,7 @@ ja:
       store: 店舗
       genre: 店舗の種類
       session: ログイン
+      user: ユーザ
     attributes:
       book:
         name: 名前
@@ -39,3 +40,9 @@ ja:
       session: 
         email: メールアドレス
         password: パスワード
+        
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
