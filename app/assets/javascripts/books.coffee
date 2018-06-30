@@ -5,5 +5,6 @@
 $ ->
   $('.addReceiptBtn').click ->
     $('.receiptWindow').toggleClass('active')
-    
+    @
+  @
   
