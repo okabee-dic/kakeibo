@@ -51,6 +51,12 @@ body {
   }
 }
 
+@media screen and (max-width: 1180px) {
+  html {
+    font-size: 50%;
+  }
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
