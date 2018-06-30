@@ -30,6 +30,13 @@ class MonthlyinputsController < ApplicationController
       return
     end
     
+    #終了日が開始日より古い場合、再入力を求める
+    if @monthlyinput.start > @monthlyinput.enddate 
+      flash[:danger] = "終了日は開始日より先の日付にしてください"
+      render 'new'
+      return
+    end
+    
     @monthlyinput = @book.monthlyinputs.build(monthlyinput_params)
     if @monthlyinput.save
       redirect_to monthlyinputs_path(:book_id => @monthlyinput.book_id)
@@ -43,6 +50,7 @@ class MonthlyinputsController < ApplicationController
   def index
     unless params[:book_id]
       redirect_to books_path
+      return
     end
     @monthlyinputs = Monthlyinput.where(:book_id => params[:book_id] )
     @book_id = params[:book_id]
