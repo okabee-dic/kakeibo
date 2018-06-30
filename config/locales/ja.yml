@@ -46,3 +46,5 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+        sex: 性別
+        birth: 誕生日
