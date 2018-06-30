@@ -1,3 +1,12 @@
+<% 
+    @days = []
+    
+    for i in 1..31
+    @days.push([i.to_s, i])
+    end
+    
+%>
+
 <% if @monthlyinput.errors.any? %>
     <div id="error_explanation">
       <h3><%= @monthlyinput.errors.count %>件のエラーがあります。</h3>
@@ -21,7 +30,10 @@
   </div>
   <div class="pb10">
   <%= form.label :inputday %>
-  <%= form.number_field :inputday %>
+  <!-- form.number_field :inputday  -->
+  <%=
+    form.select(:inputday, @days)
+  %>
   </div>
   <div class="pb10">
   <%= form.label :start %>

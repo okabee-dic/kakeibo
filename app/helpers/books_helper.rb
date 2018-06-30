@@ -17,9 +17,16 @@ module BooksHelper
     end
     monthlyincomes = Monthlyinput.where(:book_id => @book.id)
     monthlyincomes.each do |m|
-      mytime = Time.mktime(year, month, m.inputday) 
+      # 入力日が月の最後の日を超えていたら、最終日に。
+      if(m.inputday > Time.mktime(year, month, 1).end_of_month.day)
+        fixedinputday = Time.mktime(year, month, 1).end_of_month.day
+      else
+        fixedinputday = m.inputday
+      end
+      
+      mytime = Time.mktime(year, month, fixedinputday) 
       if (mytime > m.start && mytime < m.enddate) || mytime == m.start || mytime == m.enddate
-        r = @book.receipts.build({price: m.price, store_id: m.store_id, pay_date: Time.mktime(year, month, m.inputday)})
+        r = @book.receipts.build({price: m.price, store_id: m.store_id, pay_date: Time.mktime(year, month,fixedinputday)})
         @data.push(r)
         if Genre.find(Store.find(r.store_id).genre_id).income == 1
           @income = @income + r.price
