@@ -82,6 +82,18 @@ class StoresController < ApplicationController
       return
     end
     
+    if Receipt.exists?(store_id: params[:id])
+      flash[:danger] = "この店舗を指定したレシートが存在します。"
+      redirect_to stores_path(book_id: @book.id)
+      return
+    end
+    
+    if Monthlyinput.exists?(store_id: params[:id])
+      flash[:danger] = "この店舗を指定した自動入力が存在します。"
+      redirect_to stores_path(book_id: @book.id)
+      return
+    end
+    
     Store.find(params[:id]).destroy
     
     redirect_to stores_path(book_id: @book.id)
