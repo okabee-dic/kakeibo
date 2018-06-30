@@ -18,7 +18,7 @@ module BooksHelper
     monthlyincomes = Monthlyinput.where(:book_id => @book.id)
     monthlyincomes.each do |m|
       mytime = Time.mktime(year, month, m.inputday) 
-      if mytime > m.start && mytime < m.enddate  
+      if (mytime > m.start && mytime < m.enddate) || mytime == m.start || mytime == m.enddate
         r = @book.receipts.build({price: m.price, store_id: m.store_id, pay_date: Time.mktime(year, month, m.inputday)})
         @data.push(r)
         if Genre.find(Store.find(r.store_id).genre_id).income == 1
