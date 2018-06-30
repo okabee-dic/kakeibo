@@ -4,6 +4,13 @@ class StoresController < ApplicationController
 
   def new
     @bookid = params[:book_id]
+    @book = Book.find(@bookid)
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @store = Store.new
   end 
   
@@ -28,6 +35,12 @@ class StoresController < ApplicationController
   
   def index
     @book = Book.find(params[:book_id])
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
+    
     @stores = @book.stores
     @bookid = params[:book_id]
   end

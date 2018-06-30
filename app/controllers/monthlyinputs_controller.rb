@@ -46,6 +46,13 @@ class MonthlyinputsController < ApplicationController
     end
     @monthlyinputs = Monthlyinput.where(:book_id => params[:book_id] )
     @book_id = params[:book_id]
+    
+    @book = Book.find(@book_id)
+    
+    #家計簿を作成したユーザだけが追加可能
+    unless check_user(@book.user_id.to_i)
+      return
+    end
   end
   
   def destroy
