@@ -58,4 +58,6 @@ gem 'bcrypt', '3.1.11'
 
 gem 'chart-js-rails', '~> 0.1.4'
 gem 'gon', '~> 6.2.0'
+gem "font-awesome-rails"
 
+gem 'rails-i18n'

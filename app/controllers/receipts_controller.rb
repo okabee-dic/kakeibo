@@ -7,8 +7,9 @@ class ReceiptsController < ApplicationController
         redirect_to new_store_path(book_id: book)
     elsif (params[:receipt][:price]).empty?
       #金額なしは再入力
-      flash.now[:danger] = "金額を入力してください"
+      flash[:danger] = "金額を入力してください"
       redirect_to book_path(book)
+      #render :template => "book/show"
     else
       if Book.exists?(:id => book)
       #@receipt = Receipt.new(receipt_params)

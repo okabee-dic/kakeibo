@@ -1,11 +1,24 @@
 <div class="contentContainer">
-  <h2><%= @book.name %></h2>
-  <h3><%= @year %>年<%= @month %>月</h3>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @book.errors.count %>件のエラーがあります。</h3>
+      <ul>
+
+      <% @book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  
+  <h2 class="title"><%= @book.name %></h2>
+  <h3 class="pb10"><%= @year %>年<%= @month %>月</h3>
 <%
   pretime  = get_pretime
   posttime = get_posttime
 %>
-  <div class="timeselect flex">
+  <div class="timeselect flex pb10">
     <div class="left">
       &lt;&lt;<%= link_to pretime[:str] , book_path(@book.id, month: pretime[:month], year: pretime[:year]) %> 
     </div>
@@ -83,15 +96,15 @@
     </table>
   </div>
 
-  <div class="new_receipt pt10">
-      <h3>新規レシート</h3>
+  <div class="new_receipt pt20">
+      <h3 class="title">新規レシート</h3>
   <% receipt = Receipt.new %>
   <%= form_with(model: receipt, local: true, url: receipts_path) do |form| %>
-    <p>
+    <p class="pb10">
       <%= form.label :store_id %>
       <%= form.collection_select :store_id, @book.stores, :id, :name %>
     </p>
-    <p>
+    <p class="pb10">
       <%= form.label :pay_date %>
       <%= form.date_select( :pay_date, start_year: 2010, use_month_numbers: true, 
           end_year:   (Time.now.year),
@@ -99,15 +112,15 @@
           date_separator: '/' )
           %>
     </p>
-    <p>
+    <p class="pb10">
       <%= form.label :price %>
       <%= form.number_field :price %>
     </p>
-    <p>
+    <p class="pb10">
       <%= form.hidden_field :book_id, value: @book.id.to_s %>
       <%= form.hidden_field :month , value: @month %>
       <%= form.hidden_field :year , value: @year %>
-      <%= form.submit "Submit" %>
+      <%= form.submit "送信" %>
     </p>
   <% end %>
   </div> <!-- class="new_receipt" -->

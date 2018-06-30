@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
@@ -145,6 +146,48 @@ div, p, section, footer, header, nav, aside {
   padding-top: 20px;
 }
 
+.pb10 {
+  padding-bottom: 10px;
+}
+
+.pb20 {
+  padding-bottom: 20px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.timeselect .left {
+  padding-right: 10px;
+}
+
+h2.title, h3.title {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+
+.field_with_errors {
+  padding: 10px;
+  background-color: rgba(255,88,88,0.3);
+}
+
+#error_explanation {
+  border: 1px dashed #ddd;
+  margin-bottom: 20px;
+  padding: 8px;
+}
+
+#error_explanation ul {
+  padding-left: 20px;
+  margin-top: 6px;
+}
+
 /* ----------------------------- */
 /* header */
 /* ----------------------------- */
@@ -157,8 +200,8 @@ div, p, section, footer, header, nav, aside {
 .header .title {
   color: white;
   font-size: 24px;
-  padding-top: 24px;
-  padding-left: 24px;
+  padding-top: 26px;
+  padding-left: 40px;
 }
 
 .header .headerLeft {
@@ -170,21 +213,85 @@ div, p, section, footer, header, nav, aside {
   right: 0;
 }
 
+.userbtn {
+  position: relative;
+  width: 210px;
+  height: 75px;
+  padding-top: 12px;
+  padding-left: 75px;
+}
+
+.menuicon {
+  font-size: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #83a7c8;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  width: 200px;
+  border: 1px solid #ddd;
+  background-color: rgba(255,255,255,1);
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.075);
+  padding: 4px;
+  z-index: 9999;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.menu:hover {
+  display: block;
+}
+
+.menuitem {
+  padding: 10px;
+}
+
+.menuitem a {
+  text-decoration: none;
+}
+
+.bottomline {
+  border-bottom: 1px solid #ddd;
+}
+
+.menu:before{
+	content: "";
+	position: absolute;
+	top: -19px;
+	left: 50%;
+ 	margin-left: -10px;
+	border: 10px solid transparent;
+	border-bottom: 10px solid #fff;
+}
+
+
+.userbtn:hover .menu {
+  display: block;
+}
+
 /* ----------------------------- */
 /* left navigation */
 /* ----------------------------- */
 .content {
-  overflow: hidden;
   height: 100%;
   min-height: 100%;
+  position: relative;
 }
 
 .contentLeft {
   width: 250px;
   background-color: white;
+  position: absolute;
   height: 100%;
-  min-height: 100%;
-  position: fixed;
   z-index: 200;
   border-right: solid 1px #dadada;
 }

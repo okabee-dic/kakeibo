@@ -12,12 +12,15 @@ class MonthlyinputsController < ApplicationController
     # 家計簿が指定されているかチェック
     unless @monthlyinput.book_id
       redirect_to books_path
+      return
     end
     @book = Book.find(@monthlyinput.book_id)
-    if @book.monthlyinputs.create(monthlyinput_params)
+    @book_id = @book.id
+    @monthlyinput = @book.monthlyinputs.build(monthlyinput_params)
+    if @monthlyinput.save
       redirect_to monthlyinputs_path(:book_id => @monthlyinput.book_id)
     else
-      flash.now[:danger] = "失敗しました。"
+      flash[:danger] = "失敗しました。"
       render 'new'
     end
     

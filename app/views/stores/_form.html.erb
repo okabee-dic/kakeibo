@@ -1,14 +1,26 @@
+<% if @store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @store.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @store.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <%= form_with(model: @store, local: true) do |form| %>
-  <p>
+  <div class="pb10">
   <%= form.label :name %>
   <%= form.text_field :name %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
     <%= form.label :genre_id %>
     <%= form.collection_select :genre_id, Genre.all, :id, :name %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
     <%= form.hidden_field :book_id, value: @bookid %>
-    <%= form.submit "Submit" %>
-  </p>
+    <%= form.submit "送信" %>
+  </div>
 <% end %>

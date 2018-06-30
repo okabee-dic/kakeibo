@@ -1,12 +1,23 @@
 <div class="contentContainer">
-  <h2>新規家計簿を作る</h2>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @book.errors.count %>件のエラーがあります。</h3>
+      <ul>
+
+      <% @book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h2 class="title">新規家計簿を作る</h2>
   <div>
     <%= form_with(model: @book, local: true) do |form| %>
-    <p>
+    <p class="pb10">
       <%= form.label :name %>
       <%= form.text_field :name %>
     </p>
-    <p>
+    <p class="pb10">
       <%= form.submit "Submit" %>
     </p>
     <% end %>

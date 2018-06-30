@@ -23,22 +23,31 @@
 					    current_user
 					 end
 					%>
-				  
-					<% if logged_in? %>
-					<div>
+					
+				  <div class="userbtn">
+				  	<div class="menuicon">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="menu">
+            	<% if logged_in? %>
+					<div class="menuitem bottomline">
 						<%=  link_to @current_user.email, user_path(@current_user.id) %>
 					</div>
-					<div>
+					<div class="menuitem">
 						<%= link_to "ログアウト", session_path(@current_user.id), method: :delete %>
 					</div>
 					<% else %>
-					  <div>
+					  <div class="menuitem bottomline">
 					    <%= link_to "新規登録" , new_user_path %>
 					  </div>
-					  <div>
+					  <div class="menuitem">
 					  	<%= link_to "ログイン", new_session_path %>
 					  </div>
 					<% end %>
+            </div>
+          </div>
+				  
+					
 				</div>
 			</nav>
 		</header>

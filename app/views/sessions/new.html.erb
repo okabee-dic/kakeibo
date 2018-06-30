@@ -1,13 +1,16 @@
 <div class="contentContainer">
-<h1>Log in</h1>
+<h2 class="title">Log in</h2>
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-
+  <div class="pb10">
   <%= f.label :email %>
   <%= f.email_field :email %>
-
+  </div>
+  <div class="pb10">
   <%= f.label :password %>
   <%= f.password_field :password %>
-
+  </div>
+  <div class="pb10">
   <%= f.submit "Log in" %>
+  </div>
 <% end %>
 </div>

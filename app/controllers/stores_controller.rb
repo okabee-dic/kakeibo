@@ -10,11 +10,13 @@ class StoresController < ApplicationController
   def create
     @book = Book.find(params[:store][:book_id])
     @store = @book.stores.build(store_params)
+    @bookid = @book.id
     
     if @store.save
       redirect_to stores_path(book_id: @book.id)
     else
-      flash.now[:danger] = "店舗追加に失敗しました。"
+      #flash[:danger] = "店舗追加に失敗しました。"
+      render 'new'
     end
   end
   

@@ -1,33 +1,45 @@
+<% if @genre.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @genre.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @genre.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <%= form_with(model: @genre, local: true) do |form| %>
-  <p>
+  <div class="pb10">
   <%= form.label :name %>
   <%= form.text_field :name %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :convinience %>
   <%= form.number_field :convinience %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :eatout %>
   <%= form.number_field :eatout %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :supermarket %>
   <%= form.number_field :supermarket %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :income %>
   <%= form.number_field :income %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :hobby %>
   <%= form.number_field :hobby %>
-  </p>
-  <p>
+  </div>
+  <div class="pb10">
   <%= form.label :cost %>
   <%= form.number_field :cost %>
-  </p>
-  <p>
-  <%= form.submit "Submit" %>
-  </p>
+  </div>
+  <div class="pb10">
+  <%= form.submit "送信" %>
+  </div>
 <% end %>

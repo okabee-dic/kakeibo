@@ -11,6 +11,10 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
     
     if @book.save
+      #新規店舗を追加
+      g = Genre.first
+      @store = @book.stores.create({name: g.name, genre_id: g.id, book_id: @book.id})
+      
       redirect_to book_path(@book.id)
     else
       flash.now[:danger] = "家計簿を作るのに失敗しました。"
