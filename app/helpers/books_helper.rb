@@ -39,6 +39,7 @@ module BooksHelper
     @data.sort! do |a, b|
       a[:pay_date] <=> b[:pay_date]
     end
+    
     ret = {data: @data, income: @income, payment: @payment }
   end
   

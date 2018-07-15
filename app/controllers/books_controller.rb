@@ -35,6 +35,7 @@ class BooksController < ApplicationController
     
     session[:bookselect] = params[:id]
     
+    #日付指定を確認
     if params[:month]
       @month = params[:month].to_i
     else
@@ -47,6 +48,7 @@ class BooksController < ApplicationController
       @year = Time.now.year
     end
     
+    #books_helperに記述
     receipts = view_context.make_receipts(@year, @month)
     
     @data = receipts[:data]
@@ -54,7 +56,6 @@ class BooksController < ApplicationController
     @payment = receipts[:payment]
     
     @bookid = params[:id]
-    #p @data
     
   end
   

@@ -73,8 +73,6 @@ class StoresController < ApplicationController
     end
   end
   
-  
-  
   def destroy
     #家計簿を作成したユーザだけが追加可能
     @book = Book.find(params[:book_id])

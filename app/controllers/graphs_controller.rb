@@ -27,6 +27,8 @@ class GraphsController < ApplicationController
     gon.spends = []
     gon.incomes = []
     gon.totals = []
+    
+    #10か月分取得
     for i in 0..10
       month = @month - i
       year  = @year
@@ -42,11 +44,9 @@ class GraphsController < ApplicationController
       spends.push(receipts[:payment])
       incomes.push(receipts[:income])
       totals.push(receipts[:income] - receipts[:payment])
-      
-      
     end
     
-    
+    # データを逆順にする
     for i in 0..10
       gon.incomes << incomes[10-i]
       gon.spends << spends[10-i]

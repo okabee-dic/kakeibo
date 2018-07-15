@@ -1,10 +1,11 @@
 class MonthlyinputsController < ApplicationController
   def new
+    #家計簿idがなければ選択画面へ
     unless params[:book_id]
       redirect_to books_path
     end
-    @book_id = params[:book_id]
     
+    @book_id = params[:book_id]
     @book = Book.find(@book_id)
     
     #家計簿を作成したユーザだけが追加可能

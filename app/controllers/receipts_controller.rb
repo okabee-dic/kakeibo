@@ -1,5 +1,6 @@
 class ReceiptsController < ApplicationController
   before_action :check_login
+  
   def create
     if params[:receipt][:book_id]
       @book = Book.find(params[:receipt][:book_id])
@@ -12,6 +13,7 @@ class ReceiptsController < ApplicationController
     unless check_user(@book.user_id.to_i)
       return
     end
+    
     if (params[:receipt][:store_id]).nil?
         #店情報は必須
         redirect_to new_store_path(book_id: @book.id)
@@ -22,13 +24,8 @@ class ReceiptsController < ApplicationController
       #render :template => "book/show"
     else
       if Book.exists?(:id => @book.id)
-      #@receipt = Receipt.new(receipt_params)
-      #@receipt.user_id = current_user.id
-      #@receipt.save
         receipt = receipt_params
         receipt[:user_id] = current_user.id
-      
-      
       
         Book.find(@book.id).receipts.create(receipt)
         month = params[:receipt][:month]
@@ -49,7 +46,6 @@ class ReceiptsController < ApplicationController
       return
     end
     
-    #@receipt.destroy
     book.receipts.find_by(:id => params[:id]).destroy
     redirect_to book_path(book)
   end
